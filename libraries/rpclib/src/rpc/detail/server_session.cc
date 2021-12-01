@@ -1,3 +1,5 @@
+#ifdef RPC_DELETED
+
 #include "rpc/detail/server_session.h"
 
 #include "rpc/config.h"
@@ -144,3 +146,5 @@ void server_session::do_read() {
 
 } /* detail */
 } /* rpc */
+
+#endif
