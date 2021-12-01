@@ -1,3 +1,5 @@
+#ifdef RPC_DELETED
+
 #include "rpc/server.h"
 
 #include <atomic>
@@ -136,3 +138,5 @@ void server::close_session(std::shared_ptr<detail::server_session> const &s) {
 }
 
 } /* rpc */
+
+#endif

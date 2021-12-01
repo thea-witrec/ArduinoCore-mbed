@@ -1,3 +1,5 @@
+#ifdef RPC_DELETED
+
 #include "rpc/rpc_error.h"
 #include "format.h"
 
@@ -22,3 +24,5 @@ timeout::timeout(std::string const &what_arg) : std::runtime_error(what_arg) {
 const char *timeout::what() const noexcept { return formatted.data(); }
 
 } /* rpc */
+
+#endif

@@ -1,3 +1,5 @@
+#ifdef RPC_DELETED
+
 #include "rpc/client.h"
 #include "rpc/config.h"
 #include "rpc/rpc_error.h"
@@ -247,3 +249,5 @@ client::~client() {
 }
 
 }
+
+#endif
