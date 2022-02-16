@@ -1,0 +1,46 @@
+From b306d0f8497c3bdcc4d3ff3f37eb46a5493f6e5b Mon Sep 17 00:00:00 2001
+From: trik <marco.marche@gnucoop.com>
+Date: Wed, 16 Feb 2022 11:53:40 +0100
+Subject: [PATCH] ...
+
+---
+ .../TOOLCHAIN_GCC_ARM/STM32H747xI_CM7.ld         | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/targets/TARGET_STM/TARGET_STM32H7/TARGET_STM32H747xI/TARGET_STM32H747xI_CM7/TOOLCHAIN_GCC_ARM/STM32H747xI_CM7.ld b/targets/TARGET_STM/TARGET_STM32H7/TARGET_STM32H747xI/TARGET_STM32H747xI_CM7/TOOLCHAIN_GCC_ARM/STM32H747xI_CM7.ld
+index 68280f4757..6b25384b8a 100644
+--- a/targets/TARGET_STM/TARGET_STM32H7/TARGET_STM32H747xI/TARGET_STM32H747xI_CM7/TOOLCHAIN_GCC_ARM/STM32H747xI_CM7.ld
++++ b/targets/TARGET_STM/TARGET_STM32H7/TARGET_STM32H747xI/TARGET_STM32H747xI_CM7/TOOLCHAIN_GCC_ARM/STM32H747xI_CM7.ld
+@@ -32,6 +32,8 @@
+     #define MBED_CONF_TARGET_BOOT_STACK_SIZE  0x400
+ #endif
+ 
++M_CRASH_DATA_RAM_SIZE = 0x100;
++
+ /* Round up VECTORS_SIZE to 8 bytes */
+ #define VECTORS_SIZE  (((NVIC_NUM_VECTORS * 4) + 7) & 0xFFFFFFF8)
+ 
+@@ -117,7 +119,19 @@ SECTIONS
+ 
+     __etext = .;
+     _sidata = .;
+-    
++
++    .crash_data_ram :
++    {
++        . = ALIGN(8);
++        __CRASH_DATA_RAM__ = .;
++        __CRASH_DATA_RAM_START__ = .; /* Create a global symbol at data start */
++        KEEP(*(.keep.crash_data_ram))
++        *(.m_crash_data_ram)     /* This is a user defined section */
++        . += M_CRASH_DATA_RAM_SIZE;
++        . = ALIGN(8);
++        __CRASH_DATA_RAM_END__ = .; /* Define a global symbol at data end */
++    } > DTCMRAM
++
+     .data : AT (__etext)
+     {
+         __data_start__ = .;
+-- 
+2.33.0
+
