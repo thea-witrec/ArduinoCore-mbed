@@ -20,8 +20,8 @@ ln -s ../../../api/api cores/arduino/api
 echo "Creating json"
 
 source /tmp/env
-CHKSUM=`sha256sum ../$FILENAME | awk '{ print $1 }'`
-SIZE=`wc -c ../$FILENAME | awk '{ print $1 }'`
+CHKSUM=`sha256sum ../dist/$FILENAME | awk '{ print $1 }'`
+SIZE=`wc -c ../dist/$FILENAME | awk '{ print $1 }'`
 source ${flavour}
 
 FLAVOUR=${FLAVOUR^^}
