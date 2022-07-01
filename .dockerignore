@@ -1,0 +1,11 @@
+cores/arduino/api/
+cores/arduino/api*
+**/.vscode/
+**/.development
+/dist
+/node_modules
+/edge.variables
+/nano.variables
+/nicla.variables
+/portenta.variables
+/rp2040.variables
