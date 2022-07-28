@@ -13,6 +13,8 @@
       "platform.fatal-error-auto-reboot-enabled": true,
       "rtos.main-thread-stack-size": 32768,
       "cordio.max-connections": 5,
+      "cordio.desired-att-mtu": 251,
+      "cordio.rx-acl-buffer-size": 512,
       "cellular.debug-at": true,
       "cellular.offload-dns-queries": true,
       "cellular.at-handler-buffer-size": 512,
