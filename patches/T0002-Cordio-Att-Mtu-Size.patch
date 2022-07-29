@@ -1,0 +1,37 @@
+From c0f92b0de8c8b3f110a2733ecad27b51d1eb2299 Mon Sep 17 00:00:00 2001
+From: Marco Marche <marco.marche@gmail.com>
+Date: Fri, 29 Jul 2022 12:36:56 +0200
+Subject: [PATCH] ...
+
+---
+ .../FEATURE_BLE/COMPONENT_CYW43XXX/HCIDriver.cpp   | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/connectivity/drivers/ble/FEATURE_BLE/COMPONENT_CYW43XXX/HCIDriver.cpp b/connectivity/drivers/ble/FEATURE_BLE/COMPONENT_CYW43XXX/HCIDriver.cpp
+index 957e37594b..df6c8b2905 100644
+--- a/connectivity/drivers/ble/FEATURE_BLE/COMPONENT_CYW43XXX/HCIDriver.cpp
++++ b/connectivity/drivers/ble/FEATURE_BLE/COMPONENT_CYW43XXX/HCIDriver.cpp
+@@ -92,8 +92,18 @@ public:
+ 
+     virtual buf_pool_desc_t get_buffer_pool_description()
+     {
+-        // Use default buffer pool
+-        return CordioHCIDriver::get_default_buffer_pool_description();
++        static union {
++            uint8_t buffer[9000];
++            uint64_t align;
++        };
++        static const wsfBufPoolDesc_t pool_desc[] = {
++            {16, 64},
++            {32, 64},
++            {64, 32},
++            {128, 16},
++            {272, 4}
++        };
++        return buf_pool_desc_t(buffer, pool_desc);
+     }
+ 
+     virtual void do_initialize()
+-- 
+2.37.0.windows.1
+
