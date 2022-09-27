@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-export VERSION="3.1.1"
+export VERSION="3.3.0"
 
 rm -rf /tmp/mbed-os-program
 git reset --hard
@@ -11,7 +11,7 @@ mkdir mbed-os
 cd mbed-os
 git init
 git remote add origin https://github.com/ARMmbed/mbed-os.git
-git fetch --depth 1 origin 751d0cf98bb54287285103c3c5c48ae09fb7cb4c
+git fetch --depth 1 origin 30a156056ccb675345d914c5c9b3ed472f66afc9
 git checkout FETCH_HEAD
 cd /arduino/ArduinoCore-mbed
 
