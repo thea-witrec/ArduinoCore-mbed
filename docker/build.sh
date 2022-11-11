@@ -92,8 +92,11 @@ BASE_FOLDER=`basename $PWD`
 cd ../dist
 echo "tar --exclude='*.git*' --exclude='*patches*' -cjhf ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.bz2 -C .. $BASE_FOLDER"
 tar --exclude='*.git*' --exclude='*patches*' -cjhf ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.bz2 -C .. $BASE_FOLDER
+echo "tar --exclude='*.git*' --exclude='*patches*' -czhf ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.gz -C .. $BASE_FOLDER"
+tar --exclude='*.git*' --exclude='*patches*' -czhf ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.gz -C .. $BASE_FOLDER
 if [ x$FLAVOUR == x ]; then
 mv ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.bz2 ArduinoCore-mbed-$VERSION.tar.bz2
+mv ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.gz ArduinoCore-mbed-$VERSION.tar.gz
 echo FILENAME=ArduinoCore-mbed-$VERSION.tar.bz2 > /tmp/env
 else
 echo FILENAME=ArduinoCore-mbed-$FLAVOUR-$VERSION.tar.bz2 > /tmp/env
