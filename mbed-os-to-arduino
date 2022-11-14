@@ -204,6 +204,17 @@ generate_flags () {
         _sdtcm = .;\n \
         *(.dtcm*)\n \
         _edtcm = .;\n \
+    } > DTCMRAM\n \
+    .crash_data_ram :\n \
+    {\n \
+        . = ALIGN(8);\n \
+        __CRASH_DATA_RAM__ = .;\n \
+        __CRASH_DATA_RAM_START__ = .;\n \
+        KEEP(*(.keep.crash_data_ram))\n \
+        *(.m_crash_data_ram)\n \
+        . += 0x100;\n \
+        . = ALIGN(8);\n \
+        __CRASH_DATA_RAM_END__ = .;\n \
     } > DTCMRAM"
 				sed -i "s?.heap (COPY):?${OPENAMP_SECTION}\n    .heap (COPY):?g" $ARDUINOVARIANT/linker_script.ld
 				OPENAMP_REGIONS="__OPENAMP_region_start__  = 0x38000400;\n__OPENAMP_region_end__ = 0x38000400 + LENGTH(RAM_D3) - 1K;"
